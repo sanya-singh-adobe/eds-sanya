@@ -313,6 +313,19 @@ header nav .nav-brand img {
     text-decoration: none;
   }
 
+  /* Dropdown caret after each top-level menu item */
+  header nav .nav-sections .default-content-wrapper > ul > li > a::after {
+    content: '';
+    display: inline-block;
+    margin-left: 8px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentcolor;
+    border-bottom: 2px solid currentcolor;
+    transform: translateY(-2px) rotate(45deg);
+    vertical-align: middle;
+  }
+
   /* Utility bar sits in the top row, right-aligned */
   header nav .nav-tools {
     grid-area: tools;
@@ -339,8 +352,46 @@ header nav .nav-tools ul > li {
 }
 
 header nav .nav-tools a:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--brand-navy);
   text-decoration: none;
+}
+
+/* Utility icons before each link: Locations (pin), US English (globe), Search */
+header nav .nav-tools a::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: currentcolor;
+  -webkit-mask: var(--nav-tool-icon) center / contain no-repeat;
+  mask: var(--nav-tool-icon) center / contain no-repeat;
+}
+
+header nav .nav-tools ul > li:nth-child(1) a {
+  --nav-tool-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>');
+}
+
+header nav .nav-tools ul > li:nth-child(2) a {
+  --nav-tool-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.93 6h-2.95a15.65 15.65 0 00-1.38-3.56A8.03 8.03 0 0118.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a7.96 7.96 0 010-4h3.38a16.5 16.5 0 000 4H4.26zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 015.07 16zm2.95-8H5.07a7.99 7.99 0 014.33-3.56A15.65 15.65 0 008.02 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82A13.7 13.7 0 0112 19.96zM14.34 14H9.66a14.85 14.85 0 010-4h4.68a14.85 14.85 0 010 4zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a7.99 7.99 0 01-4.33 3.56zM16.36 14a16.5 16.5 0 000-4h3.38a7.96 7.96 0 010 4h-3.38z"/></svg>');
+}
+
+header nav .nav-tools ul > li:nth-child(3) a {
+  --nav-tool-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 10-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1114 9.5 4.49 4.49 0 019.5 14z"/></svg>');
+}
+
+/* US English gets a small dropdown caret after it */
+header nav .nav-tools ul > li:nth-child(2) a::after {
+  content: '';
+  display: inline-block;
+  margin-left: 2px;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  transform: translateY(-2px) rotate(45deg);
 }
 
 header nav .nav-tools a:hover {
