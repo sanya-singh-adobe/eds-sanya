@@ -1,0 +1,123 @@
+/*
+ * hero-overlay block
+ * Full-bleed background image with white headings overlaid and centered.
+ * Source: teksystems experienced-professionals hero (background photo carries
+ * its own blue color treatment; no extra tint overlay needed).
+ *
+ * EDS DOM (after decoration):
+ *   .hero-overlay
+ *     > div        <- row 1: image cell (picture > img)
+ *       > div      <- image cell
+ *     > div        <- row 2: headings cell (h1 + h2)
+ *       > div      <- headings cell
+ */
+
+/* Break out of the section max-width so the hero is full-bleed */
+.hero-overlay-container .hero-overlay-wrapper {
+  max-width: unset;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-overlay {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  padding: 40px 24px;
+  overflow: hidden;
+  text-align: center;
+  color: rgb(255 255 255);
+}
+
+/* Row 1 = the background image. Pull it out of flow and fill the block. */
+.hero-overlay > div:first-child {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-overlay > div:first-child > div,
+.hero-overlay > div:first-child p,
+.hero-overlay > div:first-child picture {
+  display: block;
+  height: 100%;
+  margin: 0;
+}
+
+.hero-overlay picture {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Row 2 = the overlaid headings, centered within the max content width. */
+.hero-overlay > div:last-child {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.hero-overlay > div:last-child > div {
+  margin: 0;
+}
+
+.hero-overlay h1,
+.hero-overlay h2 {
+  color: rgb(255 255 255);
+  text-align: center;
+}
+
+/* "Opportunity Within" - small serif eyebrow */
+.hero-overlay h1 {
+  margin: 0 0 12px;
+  font-family: museo-slab, serif;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.175;
+  text-transform: none;
+}
+
+/* "Experienced Professionals" - large bold uppercase */
+.hero-overlay h2 {
+  margin: 0 0 10px;
+  font-family: proxima-nova, sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* No-image fallback: dark text on default background */
+.hero-overlay.no-image {
+  color: var(--text-color);
+}
+
+.hero-overlay.no-image h1,
+.hero-overlay.no-image h2 {
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .hero-overlay {
+    min-height: 540px;
+    padding: 40px 32px;
+  }
+
+  .hero-overlay h2 {
+    font-size: 70px;
+    line-height: 1;
+  }
+}

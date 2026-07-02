@@ -35,15 +35,19 @@ header nav[aria-expanded='true'] {
     position: relative;
   }
 
-  header nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 0 32px;
+  /* Two-row header: utility bar (tools) on top, brand + main menu below.
+     Target both states because on desktop the nav is aria-expanded='true'. */
+  header nav,
+  header nav[aria-expanded='true'] {
+    display: grid;
+    grid-template:
+      '. tools' 49px
+      'brand sections' 73px / auto 1fr;
+    align-items: center;
+    column-gap: 32px;
     max-width: 1264px;
     padding: 0 32px;
-  }
-
-  header nav[aria-expanded='true'] {
+    height: auto;
     min-height: 0;
     overflow: visible;
   }
@@ -269,4 +273,84 @@ header nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+}
+
+/* --- TEKsystems header styling --- */
+header .nav-wrapper {
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
+}
+
+header nav .nav-brand img {
+  width: 200px;
+  height: auto;
+}
+
+@media (width >= 900px) {
+  header nav .nav-sections {
+    grid-area: sections;
+    justify-self: end;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul {
+    gap: 32px;
+    align-items: center;
+  }
+
+  header nav .nav-sections ul > li,
+  header nav .nav-sections .default-content-wrapper > ul > li {
+    font-family: var(--body-font-family);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--brand-navy);
+  }
+
+  header nav .nav-sections a:any-link {
+    color: var(--brand-navy);
+  }
+
+  header nav .nav-sections a:hover {
+    color: var(--link-hover-color);
+    text-decoration: none;
+  }
+
+  /* Utility bar sits in the top row, right-aligned */
+  header nav .nav-tools {
+    grid-area: tools;
+    justify-self: end;
+    align-self: center;
+  }
+}
+
+/* Utility / tools links (Locations, US English, Search) */
+header nav .nav-tools ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+header nav .nav-tools ul > li {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+header nav .nav-tools a:any-link {
+  color: var(--brand-navy);
+  text-decoration: none;
+}
+
+header nav .nav-tools a:hover {
+  color: var(--link-hover-color);
+}
+
+@media (width < 900px) {
+  header nav .nav-tools ul {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
 }

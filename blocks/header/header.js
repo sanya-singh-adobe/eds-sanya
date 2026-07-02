@@ -116,7 +116,10 @@ export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
+  // In this DA setup the content tree is served under /content locally; try that
+  // first, then fall back to the standard path (production / aem.page).
+  let fragment = await loadFragment(`/content${navPath}`);
+  if (!fragment) fragment = await loadFragment(navPath);
 
   // decorate nav DOM
   block.textContent = '';

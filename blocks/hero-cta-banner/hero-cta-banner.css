@@ -1,0 +1,104 @@
+/* hero-cta-banner: full-bleed CTA banner (no image variant)
+ * Values extracted from source computed styles:
+ * teksystems experienced-professionals (.score-stripe.cta.cta--full.cta--light)
+ */
+
+/* Full-bleed: break out of the EDS max-width section container.
+ * EDS wraps the block in .hero-cta-banner-wrapper inside main > .section > div
+ * (max-width: 1200px). Neutralize the wrapper and stretch the block edge-to-edge. */
+.hero-cta-banner-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-cta-banner {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 100px 24px;
+  background-color: rgb(0 118 152);
+  color: rgb(255 255 255);
+  text-align: center;
+}
+
+/* content column: constrain and center */
+.hero-cta-banner > div,
+.hero-cta-banner > div > div {
+  max-width: 1140px;
+  margin-inline: auto;
+}
+
+/* Heading (authored as the first paragraph: "Your Career, Reinvented") */
+.hero-cta-banner p:first-child {
+  margin: 0 0 10px;
+  font-family: var(--body-font-family);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: rgb(255 255 255);
+}
+
+/* Supporting paragraph */
+.hero-cta-banner p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: rgb(255 255 255);
+}
+
+/* CTA button. EDS decorates the standalone <p><a> into
+ * <p class="button-wrapper"><a class="button">, so override the global
+ * a.button styles (which use the brand green). This CTA uses the source lime.
+ * Source shows ~40px of space between the supporting paragraph and the button. */
+.hero-cta-banner .button-wrapper {
+  margin: 40px 0 0;
+}
+
+.hero-cta-banner a.button:any-link {
+  display: inline-block;
+  margin: 0;
+  padding: 15px 40px;
+  border: 1px solid rgb(193 216 47);
+  border-radius: 8px;
+  background-color: rgb(193 216 47);
+  color: rgb(2 26 50);
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: normal;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.hero-cta-banner a.button:hover,
+.hero-cta-banner a.button:focus-visible {
+  border-color: rgb(2 26 50);
+  background-color: rgb(2 26 50);
+  color: rgb(255 255 255);
+  text-decoration: none;
+}
+
+@media (width >= 900px) {
+  .hero-cta-banner {
+    padding: 100px 32px;
+  }
+
+  .hero-cta-banner p:first-child {
+    font-size: 32px;
+  }
+
+  .hero-cta-banner p {
+    font-size: 22px;
+  }
+
+  .hero-cta-banner a.button:any-link {
+    font-size: 21px;
+  }
+}

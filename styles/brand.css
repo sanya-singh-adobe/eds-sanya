@@ -1,0 +1,26 @@
+:root {
+  --heading-font-family: "museo-slab", serif;
+  --body-font-family: "proxima-nova", sans-serif;
+  --background-color: rgb(255 255 255);
+  --text-color: rgb(34 34 34);
+  --link-color: rgb(2 26 50);
+  --link-hover-color: rgb(20 137 0);
+
+  /* Brand palette */
+  --brand-navy: rgb(2 26 50);
+  --brand-accent-blue: rgb(0 149 211);
+  --brand-cta-green: rgb(20 137 0);
+  --brand-light: rgb(245 245 245);
+  --brand-dark: rgb(2 26 50);
+
+  --section-padding: 60px;
+  --content-max-width: 1200px;
+  --nav-height: 73px;
+
+  --heading-size-xxl: 48px;
+  --heading-size-xl: 36px;
+  --heading-size-l: 28px;
+  --heading-size-m: 22px;
+  --heading-size-s: 18px;
+  --heading-size-xs: 16px;
+}

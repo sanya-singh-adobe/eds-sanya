@@ -1,0 +1,39 @@
+{
+  "variantName": "columns-media",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-07-02T06:47:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.teksystems.com/en/careers/internal-careers/experienced-professionals",
+    "originPage": "careers landing page for experienced professionals",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "wide",
+    "purpose": "text-image-split",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "two columns: text + CTA | image",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "side-by-side text and image stripes",
+      "intro or benefits callouts with a supporting photo",
+      "two-column marketing sections with a CTA button"
+    ],
+    "notSuitableFor": [
+      "three or more equal columns of cards",
+      "full-width banners",
+      "repeating item grids"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en/careers/internal-careers/experienced-professionals"],
+    "reuseCount": 2,
+    "lastUsed": "2026-07-02T06:47:00.000Z"
+  }
+}

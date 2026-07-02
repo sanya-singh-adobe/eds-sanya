@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-overlay",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-07-02T06:47:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.teksystems.com/en/careers/internal-careers/experienced-professionals",
+    "originPage": "careers landing page for experienced professionals",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "page-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "background image + heading + subheading",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "full-width page headers with a background photo",
+      "landing pages with an image-overlay hero",
+      "campaign or careers intro banners with text over imagery"
+    ],
+    "notSuitableFor": [
+      "solid-color CTA banners without a background image",
+      "text-only intros",
+      "in-body callouts"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en/careers/internal-careers/experienced-professionals"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-02T06:47:00.000Z"
+  }
+}

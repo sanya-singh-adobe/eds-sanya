@@ -1,0 +1,39 @@
+{
+  "variantName": "cards-highlight",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-07-02T06:47:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.teksystems.com/en/careers/internal-careers/experienced-professionals",
+    "originPage": "careers landing page for experienced professionals",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "wide",
+    "purpose": "opportunity-highlights",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "grid of cards: heading + description (+ optional CTA)",
+    "buttonCount": 1,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "grids of text-only highlight cards (title + description)",
+      "category or opportunity listings without images",
+      "feature callout grids where one item may link out"
+    ],
+    "notSuitableFor": [
+      "image-led card grids (use the images variant instead)",
+      "two-column text/image split layouts",
+      "single hero or banner content"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en/careers/internal-careers/experienced-professionals"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-02T06:47:00.000Z"
+  }
+}
