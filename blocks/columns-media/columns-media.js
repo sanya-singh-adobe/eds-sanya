@@ -9,16 +9,22 @@ export default function decorate(block) {
     block.classList.add('columns-media-media');
   }
 
+  // Collage variant: an image column holds more than one picture (homepage
+  // "What We Do"). Tag the block so CSS can lay the photos out as a collage
+  // without regressing the single-image careers instances.
+  const hasCollage = [...block.querySelectorAll(':scope > div > div')]
+    .some((col) => col.querySelectorAll('picture').length > 1);
+  if (hasCollage) {
+    block.classList.add('columns-media-collage');
+  }
+
   // setup image columns
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
-      const pic = col.querySelector('picture');
-      if (pic) {
-        const picWrapper = pic.closest('div');
-        if (picWrapper && picWrapper.children.length === 1) {
-          // picture is only content in column
-          picWrapper.classList.add('columns-media-img-col');
-        }
+      const pictures = col.querySelectorAll('picture');
+      // An image column is a cell whose only content is one or more pictures.
+      if (pictures.length && pictures.length === col.children.length) {
+        col.classList.add('columns-media-img-col');
       }
     });
   });

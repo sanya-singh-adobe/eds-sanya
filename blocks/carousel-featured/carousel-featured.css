@@ -1,0 +1,248 @@
+/* carousel-featured -- TEKsystems featured slider
+   Values extracted from source computed styles (www.teksystems.com/en). */
+
+.carousel-featured {
+  /* full-bleed dark navy panel */
+  background-color: var(--brand-navy);
+  color: #fff;
+}
+
+.carousel-featured .carousel-featured-slides-container {
+  position: relative;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.carousel-featured .carousel-featured-slides,
+.carousel-featured .carousel-featured-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-featured .carousel-featured-slides {
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: scroll clip;
+}
+
+.carousel-featured .carousel-featured-slides::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Slide: stacks on mobile, image + content --- */
+.carousel-featured .carousel-featured-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column-reverse; /* content above image on mobile (matches source order) */
+  gap: 32px;
+  width: 100%;
+  padding: 48px 0;
+}
+
+/* --- Image cell --- */
+.carousel-featured .carousel-featured-slide-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-featured .carousel-featured-slide-image picture {
+  display: block;
+  width: 100%;
+}
+
+.carousel-featured .carousel-featured-slide-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* --- Content cell --- */
+.carousel-featured .carousel-featured-slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  color: #fff;
+}
+
+/* eyebrow tag (first paragraph in the content cell) */
+.carousel-featured .carousel-featured-slide-content > p:first-child {
+  margin: 0;
+  color: var(--brand-lime);
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+/* heading */
+.carousel-featured .carousel-featured-slide-content h2 {
+  margin: 0;
+  color: #fff;
+  font-family: var(--body-font-family);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+/* body copy */
+.carousel-featured .carousel-featured-slide-content p {
+  margin: 0;
+  color: #fff;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+/* CTA: text link with lime chevron (override global a.button) */
+.carousel-featured .carousel-featured-slide-content p:has(> a),
+.carousel-featured .carousel-featured-slide-content p.button-container {
+  margin: 0;
+}
+
+.carousel-featured .carousel-featured-slide-content a,
+.carousel-featured a.button:any-link,
+.carousel-featured button.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  border: 0;
+  padding: 12px 0;
+  background: none;
+  color: var(--brand-lime);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+  text-transform: none;
+  transition: gap 0.2s ease;
+}
+
+.carousel-featured .carousel-featured-slide-content a:hover,
+.carousel-featured a.button:hover,
+.carousel-featured a.button:focus-visible {
+  color: var(--brand-lime);
+  background: none;
+  border: 0;
+  text-decoration: none;
+  gap: 18px;
+}
+
+/* chevron arrow after CTA */
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel-featured .carousel-featured-slide-content a::after,
+.carousel-featured a.button:any-link::after {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border: solid var(--brand-lime);
+  border-width: 0 2px 2px 0;
+  transform: rotate(-45deg);
+}
+
+/* nav wrapper that holds the indicators -- align with content container */
+.carousel-featured nav[aria-label] {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+/* --- Pagination indicators: 01 / 02 with lime underline --- */
+.carousel-featured .carousel-featured-slide-indicators {
+  display: flex;
+  gap: 24px;
+  padding: 0 0 48px;
+  margin: 0;
+  background: none;
+  line-height: 24px;
+  counter-reset: slide;
+}
+
+.carousel-featured .carousel-featured-slide-indicator {
+  counter-increment: slide;
+}
+
+.carousel-featured .carousel-featured-slide-indicator button {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 4px 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #fff;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.carousel-featured .carousel-featured-slide-indicator button::before {
+  content: '0' counter(slide);
+}
+
+.carousel-featured .carousel-featured-slide-indicator button:hover {
+  color: var(--brand-lime);
+}
+
+/* active indicator (JS disables the current one) gets lime text + underline */
+.carousel-featured .carousel-featured-slide-indicator button:disabled {
+  color: var(--brand-lime);
+  border-bottom-color: var(--brand-lime);
+}
+
+/* --- Prev/next nav buttons (hidden by default, source uses pagination) --- */
+.carousel-featured .carousel-featured-navigation-buttons {
+  display: none;
+}
+
+/* --- Desktop: split layout, content left / image right --- */
+@media (width >= 900px) {
+  .carousel-featured .carousel-featured-slide {
+    flex-direction: row; /* image cell (col0) left, content (col1) right in DOM */
+    align-items: center;
+    gap: 60px;
+    min-height: 620px;
+    padding: 80px 0;
+  }
+
+  /* Source layout: content on LEFT, image on RIGHT.
+     DOM order is [image, content] so reverse visually. */
+  .carousel-featured .carousel-featured-slide-image {
+    order: 2;
+    flex: 1 1 50%;
+  }
+
+  .carousel-featured .carousel-featured-slide-content {
+    order: 1;
+    flex: 1 1 45%;
+    gap: 24px;
+  }
+
+  .carousel-featured .carousel-featured-slide-content h2 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .carousel-featured .carousel-featured-slide-content p {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .carousel-featured .carousel-featured-slide-image img {
+    max-height: 480px;
+  }
+}

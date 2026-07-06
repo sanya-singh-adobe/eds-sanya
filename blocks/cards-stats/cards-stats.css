@@ -1,0 +1,154 @@
+.cards-stats > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+/* ----------------------------------------------------------------------------
+   Icon cards: white card, thick orange top border, big navy number + label
+   -------------------------------------------------------------------------- */
+.cards-stats > ul > li.cards-stats-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 0 0 0 24px;
+  background-color: var(--background-color, #fff);
+  border-top: 24px solid var(--brand-orange, rgb(248 151 29));
+  border-radius: 8px;
+  box-shadow: 0 0 20.6px 0 rgb(0 0 0 / 15%);
+  min-height: 140px;
+}
+
+.cards-stats .cards-stats-card-image {
+  line-height: 0;
+  flex: 0 0 auto;
+}
+
+.cards-stats .cards-stats-card-image img {
+  width: 49px;
+  height: 49px;
+  object-fit: contain;
+}
+
+.cards-stats .cards-stats-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 8px;
+}
+
+.cards-stats .cards-stats-card-body h2,
+.cards-stats .cards-stats-card-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family, "museo-slab", serif);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--brand-navy, rgb(2 26 50));
+}
+
+.cards-stats .cards-stats-card-body p {
+  margin: 0;
+  font-family: var(--body-font-family, "proxima-nova", sans-serif);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--brand-navy, rgb(2 26 50));
+}
+
+/* ----------------------------------------------------------------------------
+   Percentage stats: thin-ring donut gauge with a blue arc + centered number
+   -------------------------------------------------------------------------- */
+.cards-stats > ul > li.cards-stats-percent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.cards-stats .cards-stats-percent-value {
+  --percent: 0;
+  --ring-size: 200px;
+
+  position: relative;
+  width: var(--ring-size);
+  height: var(--ring-size);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Thin near-black base ring outline */
+  border: 1px solid rgb(0 0 0);
+}
+
+/* Blue arc proportional to the percentage, sitting on top of the base ring */
+.cards-stats .cards-stats-percent-value::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      var(--brand-accent-blue, rgb(0 149 211)) calc(var(--percent) * 1%),
+      transparent 0
+    );
+  -webkit-mask:
+    radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+  mask:
+    radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+}
+
+.cards-stats .cards-stats-percent-value h2,
+.cards-stats .cards-stats-percent-value h3 {
+  margin: 0;
+  font-family: var(--body-font-family, "proxima-nova", sans-serif);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgb(0 0 0);
+}
+
+.cards-stats .cards-stats-percent-sign {
+  font-size: 0.5em;
+  font-weight: 700;
+  vertical-align: baseline;
+}
+
+.cards-stats .cards-stats-percent-label {
+  max-width: 320px;
+  margin: 0;
+  font-family: var(--body-font-family, "proxima-nova", sans-serif);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-color, rgb(34 34 34));
+}
+
+/* ----------------------------------------------------------------------------
+   Desktop: 2 icon cards side by side, 3 percentage gauges side by side
+   -------------------------------------------------------------------------- */
+@media (width >= 900px) {
+  .cards-stats > ul {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 32px 24px;
+  }
+
+  .cards-stats > ul > li.cards-stats-icon {
+    grid-column: span 3;
+  }
+
+  .cards-stats > ul > li.cards-stats-percent {
+    grid-column: span 2;
+  }
+}

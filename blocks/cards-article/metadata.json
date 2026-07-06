@@ -1,0 +1,39 @@
+{
+  "variantName": "cards-article",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-07-06T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.teksystems.com/en/",
+    "originPage": "homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "wide",
+    "purpose": "article-cards",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "grid of cards: image | category tag + title + description + CTA button",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "image-led article / insight / news card grids",
+      "blog or resource listings with category tags and read-more buttons",
+      "featured content grids with a photo per item"
+    ],
+    "notSuitableFor": [
+      "text-only highlight cards (use cards-highlight)",
+      "statistic grids (use cards-stats)",
+      "logo grids (use columns-logos)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-06T00:00:00.000Z"
+  }
+}

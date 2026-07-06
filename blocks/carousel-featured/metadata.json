@@ -1,0 +1,39 @@
+{
+  "variantName": "carousel-featured",
+  "baseBlock": "carousel",
+  "version": "1.0.0",
+  "created": "2026-07-06T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.teksystems.com/en/",
+    "originPage": "homepage",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "wide",
+    "purpose": "featured-slider",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "each slide: image | eyebrow + heading + description + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "rotating featured content sliders with image + text + CTA per slide",
+      "promotional carousels with paginated indicators",
+      "homepage feature spotlights"
+    ],
+    "notSuitableFor": [
+      "single static hero banners",
+      "image-only galleries without text",
+      "repeating card grids that should all be visible at once"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-06T00:00:00.000Z"
+  }
+}

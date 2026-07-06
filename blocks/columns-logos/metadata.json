@@ -1,0 +1,39 @@
+{
+  "variantName": "columns-logos",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-07-06T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.teksystems.com/en/",
+    "originPage": "homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "wide",
+    "purpose": "logo-grid",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "responsive grid of linked logo tiles (image-only cells)",
+    "buttonCount": 0,
+    "imageCount": 7
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "partner / client / technology logo grids",
+      "linked logo walls with shadowed tiles",
+      "brand or integration showcases"
+    ],
+    "notSuitableFor": [
+      "text + image split layouts (use columns-media)",
+      "content cards with titles and descriptions (use cards variants)",
+      "single hero or banner content"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-06T00:00:00.000Z"
+  }
+}

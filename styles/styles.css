@@ -358,3 +358,49 @@ main .section.dark h5,
 main .section.dark h6 {
   color: #fff;
 }
+
+/* ==========================================================================
+ * Announcement notice strip (default content)
+ * The first section may contain a scam/security alert authored as plain
+ * content: an icon image (alt="Announcement") followed by a line of text.
+ * Render it as a compact, full-width, horizontal notice strip rather than a
+ * tall stacked block. Scoped via :has() so it never affects other sections.
+ * ========================================================================== */
+main .default-content-wrapper:has(> p img[alt="Announcement"]) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: none;
+  margin: 0;
+  padding: 12px 24px;
+  border-bottom: 1px solid rgb(224 224 224);
+  background-color: #fafafa;
+  color: var(--text-color);
+  text-align: center;
+}
+
+main .default-content-wrapper:has(> p img[alt="Announcement"]) > p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Icon paragraph: keep only the icon, sized inline. */
+main .default-content-wrapper:has(> p img[alt="Announcement"]) > p:first-child {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+main .default-content-wrapper:has(> p img[alt="Announcement"]) img[alt="Announcement"] {
+  display: block;
+  width: 30px;
+  height: auto;
+}
+
+main .default-content-wrapper:has(> p img[alt="Announcement"]) a:any-link {
+  color: var(--brand-accent-blue);
+  text-decoration: underline;
+}

@@ -102,3 +102,114 @@
     font-size: 21px;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * Homepage variant: "IT and Business Services" band (.has-heading).
+ * Applied by the block JS only when the instance is authored with an
+ * <h2> heading, so it targets ONLY the homepage band and leaves the
+ * careers banner (bold <p> heading) untouched.
+ * Values from source computed styles (.score-stripe / .score-column2,
+ * teksystems.com/en/ — teal rgb(0 118 152), left text + right button).
+ * ------------------------------------------------------------------ */
+.hero-cta-banner.has-heading {
+  padding: 60px 0;
+  text-align: left;
+}
+
+/* Inner row: constrain content and gutter (source inner padding 30px) */
+.hero-cta-banner.has-heading > div {
+  max-width: 1200px;
+  padding: 0 30px;
+  margin-inline: auto;
+}
+
+.hero-cta-banner.has-heading > div > div {
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* Heading: large light-weight sans-serif in white (overrides global h2
+ * museo-slab / dark text styling). */
+.hero-cta-banner.has-heading h2 {
+  margin: 0 0 20px;
+  font-family: var(--body-font-family);
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: rgb(255 255 255);
+}
+
+/* Supporting paragraph */
+.hero-cta-banner.has-heading .hero-cta-banner-text p {
+  margin: 0 0 25px;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.hero-cta-banner.has-heading .hero-cta-banner-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* CTA: transparent fill, lime outline, white text, no uppercase.
+ * Override the global a.button styles and the careers solid-lime rule. */
+.hero-cta-banner.has-heading .button-wrapper {
+  margin: 25px 0 0;
+}
+
+.hero-cta-banner.has-heading a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 16px;
+  border: 2px solid rgb(193 216 47);
+  border-radius: 10px;
+  background-color: transparent;
+  color: rgb(255 255 255);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.hero-cta-banner.has-heading a.button:hover,
+.hero-cta-banner.has-heading a.button:focus-visible {
+  border-color: rgb(193 216 47);
+  background-color: rgb(193 216 47);
+  color: rgb(2 26 50);
+}
+
+@media (width >= 900px) {
+  /* Text left, button right, vertically centered */
+  .hero-cta-banner.has-heading > div > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .hero-cta-banner.has-heading .hero-cta-banner-text {
+    flex: 1 1 auto;
+  }
+
+  .hero-cta-banner.has-heading .button-wrapper {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .hero-cta-banner.has-heading h2 {
+    margin-bottom: 0;
+    font-size: 64px;
+    line-height: 1.2;
+  }
+
+  .hero-cta-banner.has-heading .hero-cta-banner-text p {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .hero-cta-banner.has-heading a.button:any-link {
+    font-size: 16px;
+  }
+}

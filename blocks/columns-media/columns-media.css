@@ -74,6 +74,99 @@
   color: var(--text-color);
 }
 
+/* =========================================================================
+   Collage variant (.columns-media-collage) -- homepage "What We Do".
+   Text cell (h2 + p + CTA) rendered on a white card, alongside a collage of
+   several rounded photos, all on a light-grey full-width band.
+   Distinguished from the careers instances by the image cell holding >1
+   picture (tagged in columns-media.js).
+   ========================================================================= */
+.columns-media-collage {
+  padding: 40px 0;
+  background-color: var(--brand-light);
+}
+
+/* full-width light-grey band even though EDS constrains the section */
+.columns-media-collage-wrapper {
+  max-width: 100% !important;
+}
+
+/* text card */
+.columns-media-collage > div > div:not(.columns-media-img-col) {
+  padding: 32px 24px;
+  border-radius: 12px;
+  background-color: var(--background-color);
+}
+
+/* heading: proxima-nova light, navy (source: 40px/48px, weight 300) */
+.columns-media-collage h2 {
+  margin: 0 0 16px;
+  font-family: var(--body-font-family);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--brand-navy);
+}
+
+/* body copy (source: 20px / 24px) */
+.columns-media-collage p {
+  margin: 0 0 25px;
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+/* CTA rendered as a text link with chevron (source: no fill, rgb(0 118 152),
+   16px / 700). Override the global filled button treatment. */
+.columns-media-collage a.button:any-link {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: rgb(0 118 152);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.columns-media-collage a.button:any-link::after {
+  content: "\203A";
+  margin-left: 10px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.columns-media-collage a.button:hover,
+.columns-media-collage a.button:focus-visible {
+  background-color: transparent;
+  color: var(--brand-navy);
+  text-decoration: none;
+}
+
+/* collage of photos */
+.columns-media-collage .columns-media-img-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.columns-media-collage .columns-media-img-col picture {
+  display: block;
+}
+
+.columns-media-collage .columns-media-img-col picture:first-child {
+  grid-column: 1 / -1;
+}
+
+.columns-media-collage .columns-media-img-col img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
 @media (width >= 900px) {
   .columns-media {
     padding: 60px 0;
@@ -136,5 +229,45 @@
     width: 100%;
     height: 480px;
     object-fit: cover;
+  }
+
+  /* --- Collage variant desktop: text card on the left overlaps a taller
+     photo collage on the right, on the light-grey band. --- */
+  .columns-media-collage > div {
+    align-items: center;
+    gap: 0;
+  }
+
+  /* text card ~55% width, lifted above the collage and nudged right so it
+     overlaps the imagery like the source. The extra :has() qualifier keeps
+     this ahead of the shared intro (2:1) flex rule in specificity. */
+  .columns-media-collage > div:has(.columns-media-img-col) > div:not(.columns-media-img-col) {
+    z-index: 1;
+    flex: 0 1 55%;
+    margin-right: -8%;
+    padding: 48px;
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgb(0 0 0 / 8%);
+  }
+
+  .columns-media-collage h2 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .columns-media-collage p {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .columns-media-collage > div:has(.columns-media-img-col) > .columns-media-img-col {
+    flex: 1 1 53%;
+    align-self: stretch;
+    grid-template-rows: 2fr 1fr;
+    min-height: 560px;
+  }
+
+  .columns-media-collage .columns-media-img-col picture:first-child {
+    grid-row: 1;
   }
 }

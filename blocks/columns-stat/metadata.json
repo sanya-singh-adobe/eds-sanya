@@ -1,0 +1,39 @@
+{
+  "variantName": "columns-stat",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-07-06T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.teksystems.com/en/",
+    "originPage": "homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "wide",
+    "purpose": "text-stat-callout",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "two columns: text (eyebrow/heading/paragraph/CTA) | big-number stat card",
+    "buttonCount": 1,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "success-story or callout sections pairing narrative text with a single emphasized statistic",
+      "two-column layouts where one side is a highlighted metric card",
+      "conversion sections with a headline metric"
+    ],
+    "notSuitableFor": [
+      "text + photo splits (use columns-media)",
+      "grids of multiple statistics (use cards-stats)",
+      "full-width banners"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-06T00:00:00.000Z"
+  }
+}
