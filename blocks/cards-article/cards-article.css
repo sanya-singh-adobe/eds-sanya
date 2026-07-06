@@ -1,11 +1,143 @@
 /* cards-article -- "Latest Insights" article cards
    Source: teksystems.com/en/ (navy tiles, white text, lime "Read Now") */
 
-/* Responsive grid: 1 col mobile, 2 col tablet, 3 col desktop */
+/* Full-bleed subtle grey band behind the whole insights unit (header + cards).
+   The section content is contained at 1200px, so break out to full viewport
+   width for the background, then re-contain the inner content. */
+.cards-article {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  padding: 60px 0;
+  background-color: var(--brand-light);
+  box-sizing: border-box;
+}
+
+/* Re-contain the inner content (header + cards) to the 1200px content width,
+   with the same side padding as the global section content so the header and
+   cards align to the same left/right edges. */
+.cards-article > .cards-article-header,
+.cards-article > ul {
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+@media (width >= 900px) {
+  .cards-article > .cards-article-header,
+  .cards-article > ul {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* Header row: eyebrow + heading on the left, "View All" button on the right */
+.cards-article-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+@media (width >= 900px) {
+  .cards-article-header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.cards-article-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Eyebrow: small accent-blue label ("Latest Insights") */
+.cards-article-header-text p {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--brand-accent-blue);
+}
+
+.cards-article-header-text p em {
+  font-style: normal;
+}
+
+/* Heading: large, light-weight, dark ("Thinking Forward") */
+.cards-article-header-text h2 {
+  margin: 24px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 48px;
+  color: var(--text-color);
+}
+
+/* "View All" outlined button (lime border, navy text, transparent bg) */
+.cards-article-header .cards-article-header-cta {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.cards-article-header a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  border: 2px solid var(--brand-lime);
+  border-radius: 10px;
+  padding: 16px 20px;
+  background-color: transparent;
+  color: var(--brand-navy);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cards-article-header a.button:any-link::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-top: 2px solid var(--brand-navy);
+  border-right: 2px solid var(--brand-navy);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.cards-article-header a.button:hover,
+.cards-article-header a.button:focus-visible {
+  background-color: var(--brand-navy);
+  border-color: var(--brand-navy);
+  color: #fff;
+}
+
+.cards-article-header a.button:hover::after,
+.cards-article-header a.button:focus-visible::after {
+  border-top-color: #fff;
+  border-right-color: #fff;
+  transform: rotate(45deg) translate(2px, -2px);
+}
+
+/* Responsive grid: 1 col mobile, 2 col tablet, 3 col desktop.
+   (Horizontal padding + centering set above so the cards align with the header
+   inside the contained content column; keep only vertical padding reset here.) */
 .cards-article > ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  padding-top: 0;
+  padding-bottom: 0;
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;

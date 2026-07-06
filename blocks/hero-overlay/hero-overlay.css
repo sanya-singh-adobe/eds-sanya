@@ -215,14 +215,17 @@
     padding: 0;
   }
 
+  /* Video spans the FULL page width, anchored to the lower portion of the hero
+     canvas (issue #1: cover the whole width of the page). Break out of the
+     centered content column to 100vw. */
   .hero-overlay.primary > div:first-child {
     position: absolute;
-    top: 62%;
+    top: 55%;
     bottom: 0;
-    left: 0;
+    left: 50%;
     z-index: 0;
-    width: 55%;
-    margin: 0;
+    width: 100vw;
+    margin-left: -50vw;
     overflow: hidden;
   }
 

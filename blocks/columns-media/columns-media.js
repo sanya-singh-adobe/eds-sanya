@@ -23,7 +23,16 @@ export default function decorate(block) {
     [...row.children].forEach((col) => {
       const pictures = col.querySelectorAll('picture');
       // An image column is a cell whose only content is one or more pictures.
-      if (pictures.length && pictures.length === col.children.length) {
+      // EDS may wrap bare images in <p> tags, so also treat a cell whose direct
+      // children are only pictures and/or picture-only <p> wrappers as an image
+      // column (this is the collage case: three pictures inside a single <p>).
+      const onlyPicturesOrPWrappers = [...col.children].every((child) => {
+        if (child.tagName === 'PICTURE') return true;
+        return child.tagName === 'P'
+          && child.querySelector('picture')
+          && child.querySelectorAll('picture').length === child.children.length;
+      });
+      if (pictures.length && onlyPicturesOrPWrappers) {
         col.classList.add('columns-media-img-col');
       }
     });

@@ -144,10 +144,16 @@
   text-decoration: none;
 }
 
-/* collage of photos */
+/* collage of photos -- mobile: a simple stacked column of rounded photos.
+   EDS wraps the three bare images in a single <p>; flatten it so the pictures
+   participate directly in the img-col layout. */
+.columns-media-collage .columns-media-img-col > p {
+  display: contents;
+}
+
 .columns-media-collage .columns-media-img-col {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -155,14 +161,10 @@
   display: block;
 }
 
-.columns-media-collage .columns-media-img-col picture:first-child {
-  grid-column: 1 / -1;
-}
-
 .columns-media-collage .columns-media-img-col img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -231,20 +233,26 @@
     object-fit: cover;
   }
 
-  /* --- Collage variant desktop: text card on the left overlaps a taller
-     photo collage on the right, on the light-grey band. --- */
-  .columns-media-collage > div {
-    align-items: center;
-    gap: 0;
+  /* --- Collage variant desktop: a staggered photo collage fills the row while
+     the white text card floats on the left, overlapping the imagery like the
+     source scroll-pinned composition. The row becomes the positioning context
+     so the text card can sit on top of the photos. --- */
+  .columns-media-collage > div:has(.columns-media-img-col) {
+    position: relative;
+    display: block;
+    min-height: 620px;
+    padding: 40px 0;
   }
 
-  /* text card ~55% width, lifted above the collage and nudged right so it
-     overlaps the imagery like the source. The extra :has() qualifier keeps
-     this ahead of the shared intro (2:1) flex rule in specificity. */
+  /* text card: ~46% width, horizontally + vertically centered, floating over
+     the collage (matches the live site's centered white card). */
   .columns-media-collage > div:has(.columns-media-img-col) > div:not(.columns-media-img-col) {
-    z-index: 1;
-    flex: 0 1 55%;
-    margin-right: -8%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    width: 46%;
+    transform: translate(-50%, -50%);
     padding: 48px;
     border-radius: 16px;
     box-shadow: 0 20px 45px rgb(0 0 0 / 8%);
@@ -260,14 +268,50 @@
     line-height: 24px;
   }
 
+  /* collage stage: three photos absolutely placed in a staggered arrangement.
+     Lead photo (photocollage-3, laptop hand) lower-left; supporting photo
+     (photocollage-2, two people) upper-right; third photo (photocollage-1,
+     aerial meeting) lower-right and offset down. */
   .columns-media-collage > div:has(.columns-media-img-col) > .columns-media-img-col {
-    flex: 1 1 53%;
-    align-self: stretch;
-    grid-template-rows: 2fr 1fr;
-    min-height: 560px;
+    position: static;
+    display: block;
+    height: 620px;
   }
 
-  .columns-media-collage .columns-media-img-col picture:first-child {
-    grid-row: 1;
+  .columns-media-collage .columns-media-img-col picture {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  .columns-media-collage .columns-media-img-col img {
+    height: 100%;
+  }
+
+  /* photo 1 -- laptop hand: lower-left, tall, sits partly behind the text card */
+  .columns-media-collage .columns-media-img-col picture:nth-child(1) {
+    top: 200px;
+    left: 0;
+    z-index: 1;
+    width: 30%;
+    height: 380px;
+  }
+
+  /* photo 2 -- two people/code: upper-right, the largest lead image */
+  .columns-media-collage .columns-media-img-col picture:nth-child(2) {
+    top: 0;
+    right: 0;
+    z-index: 1;
+    width: 44%;
+    height: 372px;
+  }
+
+  /* photo 3 -- aerial meeting: lower-right, with a clear gap below photo 2 */
+  .columns-media-collage .columns-media-img-col picture:nth-child(3) {
+    right: 6%;
+    bottom: 0;
+    z-index: 1;
+    width: 38%;
+    height: 224px;
   }
 }

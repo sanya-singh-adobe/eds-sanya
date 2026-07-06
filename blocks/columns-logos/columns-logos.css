@@ -1,6 +1,11 @@
 /* columns-logos: "Our Partnerships" -- text column (left) + logo tile grid (right)
    Values extracted from source computed styles at teksystems.com/en */
 
+/* Slight breathing room above and below the Our Partnerships section. */
+.columns-logos {
+  padding: 40px 0;
+}
+
 /* Row layout: mobile-first, single column (logo grid stacks under text) */
 .columns-logos > div {
   display: flex;
@@ -70,15 +75,18 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   align-content: start;
+  align-items: start;
 }
 
 /* Tile: white card, subtle shadow, rounded corners, centered logo.
-   Square aspect ratio (~255x255 on source) with logo contained inside. */
+   Landscape rectangle -- height is driven by the capped logo (~47px) plus
+   24px padding, so tiles are noticeably wider than tall (~255x91 on source). */
 .columns-logos .columns-logos-tile {
   display: flex;
+  box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1 / 1;
+  height: 91px;
   padding: 24px;
   border-radius: 7.432px;
   background-color: #fff;
@@ -94,17 +102,17 @@
 .columns-logos .columns-logos-grid picture {
   display: flex;
   width: 100%;
-  height: 100%;
   align-items: center;
   justify-content: center;
 }
 
-/* Logo fills the padded tile box, contained (preserves aspect ratio) */
+/* Logo is small and centered inside the tile: capped at ~47px tall,
+   contained so its landscape aspect ratio is preserved. */
 .columns-logos .columns-logos-grid img {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 47px;
   object-fit: contain;
 }
 
@@ -115,6 +123,12 @@
     grid-template-columns: 1fr 1fr;
     gap: 48px;
     align-items: center;
+  }
+
+  /* Slight left indentation so the text isn't flush to the far-left content
+     edge, matching the source (heading sits ~30px in from the content margin). */
+  .columns-logos .columns-logos-text {
+    padding-left: 30px;
   }
 
   .columns-logos .columns-logos-text h2 {

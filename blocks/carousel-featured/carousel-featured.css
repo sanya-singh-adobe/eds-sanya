@@ -2,7 +2,15 @@
    Values extracted from source computed styles (www.teksystems.com/en). */
 
 .carousel-featured {
-  /* full-bleed dark navy panel */
+  /* full-bleed dark navy band — break out edge-to-edge (issue #2: remove
+     left/right margin). The block wrapper is inside the centered section div,
+     so use the 100vw technique to span the full page width. */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
   background-color: var(--brand-navy);
   color: #fff;
 }
@@ -21,11 +29,13 @@
   padding: 0;
 }
 
+/* Issue #2: the live site does NOT use a 01/02 slider — it shows the two
+   panels stacked one below the other. Override the horizontal scroll-snap
+   carousel with a simple vertical stack. */
 .carousel-featured .carousel-featured-slides {
   display: flex;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  overflow: scroll clip;
+  flex-direction: column;
+  overflow: visible;
 }
 
 .carousel-featured .carousel-featured-slides::-webkit-scrollbar {
@@ -59,7 +69,6 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 6px;
 }
 
 /* --- Content cell --- */
@@ -150,14 +159,67 @@
   transform: rotate(-45deg);
 }
 
-/* nav wrapper that holds the indicators -- align with content container */
-.carousel-featured nav[aria-label] {
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-  padding: 0 30px;
+/* --- Second slide: light theme ---------------------------------------------
+   On the live site the two stacked panels use different color treatments. The
+   first (Press Release) is the navy band with white text + lime accents (the
+   block default). The second (State of Digital Transformation) sits on a light
+   page background with dark text, a blue eyebrow and a teal link. Recreate that
+   here: give slide 2 its own full-bleed white band via a pseudo-element (the
+   slide lives inside the centered 1200px container) and recolor its text. */
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] {
+  position: relative;
 }
 
-/* --- Pagination indicators: 01 / 02 with lime underline --- */
+.carousel-featured .carousel-featured-slide[data-slide-index='1']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 0;
+  width: 100vw;
+  margin-left: -50vw;
+  background-color: #fff;
+}
+
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] > * {
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] .carousel-featured-slide-content {
+  color: rgb(34 34 34);
+}
+
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] .carousel-featured-slide-content > p:first-child {
+  color: rgb(0 121 201);
+}
+
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] .carousel-featured-slide-content h2,
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] .carousel-featured-slide-content p {
+  color: rgb(34 34 34);
+}
+
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] .carousel-featured-slide-content a {
+  color: rgb(0 118 152);
+}
+
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] .carousel-featured-slide-content a:hover,
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] .carousel-featured-slide-content a:focus-visible {
+  color: rgb(0 118 152);
+}
+
+.carousel-featured .carousel-featured-slide[data-slide-index='1'] .carousel-featured-slide-content a::after {
+  border-color: rgb(0 118 152);
+}
+
+/* Issue #2: hide the slider navigation (01/02 indicators + prev/next) — the
+   live site stacks the panels instead of paginating. */
+.carousel-featured nav[aria-label] {
+  display: none;
+}
+
+/* --- Pagination indicators: 01 / 02 with lime underline (hidden; see above) --- */
 .carousel-featured .carousel-featured-slide-indicators {
   display: flex;
   gap: 24px;
@@ -214,21 +276,29 @@
   .carousel-featured .carousel-featured-slide {
     flex-direction: row; /* image cell (col0) left, content (col1) right in DOM */
     align-items: center;
+    justify-content: space-between;
     gap: 60px;
-    min-height: 620px;
-    padding: 80px 0;
+    box-sizing: border-box;
+    /* Shorter band (issue #2): two panels stacked, each a compact height
+       rather than a full-viewport 778px slide. */
+    min-height: 0;
+    padding: 48px 0;
   }
 
   /* Source layout: content on LEFT, image on RIGHT.
-     DOM order is [image, content] so reverse visually. */
+     DOM order is [image, content] so reverse visually.
+     Image sits in a fixed box and covers it, so both landscape (1200x630)
+     and squarer (640x480) slide images fill gracefully without distortion. */
   .carousel-featured .carousel-featured-slide-image {
     order: 2;
-    flex: 1 1 50%;
+    flex: 0 0 515px;
+    align-self: center;
+    height: 340px;
   }
 
   .carousel-featured .carousel-featured-slide-content {
     order: 1;
-    flex: 1 1 45%;
+    flex: 0 1 515px;
     gap: 24px;
   }
 
@@ -242,7 +312,14 @@
     line-height: 24px;
   }
 
+  .carousel-featured .carousel-featured-slide-image picture {
+    width: 100%;
+    height: 100%;
+  }
+
   .carousel-featured .carousel-featured-slide-image img {
-    max-height: 480px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

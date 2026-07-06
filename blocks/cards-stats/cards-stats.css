@@ -1,21 +1,62 @@
-.cards-stats > ul {
+/* ----------------------------------------------------------------------------
+   Layout: heading (left) beside the two icon cards (right) on the top row, with
+   the three donut gauges spanning full width beneath. Mobile-first: everything
+   stacks in a single column; the 2-column layout kicks in at desktop.
+   -------------------------------------------------------------------------- */
+.cards-stats.block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px 32px;
+  align-items: start;
+
+  /* Space above the "Our Company at a Glance" section, separating it from the
+     preceding success-story stripe. */
+  padding-top: 60px;
+}
+
+.cards-stats ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+/* Heading column: "Our Company at a Glance" + subheading */
+.cards-stats .cards-stats-heading h2,
+.cards-stats .cards-stats-heading h3 {
+  margin: 0 0 8px;
+  color: var(--brand-navy, rgb(2 26 50));
+}
+
+.cards-stats .cards-stats-heading h2 {
+  font-family: var(--body-font-family, "proxima-nova", sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.cards-stats .cards-stats-heading h3 {
+  font-family: var(--heading-font-family, "museo-slab", serif);
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+/* Icon-card group and donut group share the same list defaults */
+.cards-stats .cards-stats-icons ul,
+.cards-stats .cards-stats-donuts ul {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
+  gap: 24px;
 }
 
 /* ----------------------------------------------------------------------------
    Icon cards: white card, thick orange top border, big navy number + label
    -------------------------------------------------------------------------- */
-.cards-stats > ul > li.cards-stats-icon {
+.cards-stats li.cards-stats-icon {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 16px;
-  padding: 0 0 0 24px;
+  padding: 0 24px;
   background-color: var(--background-color, #fff);
   border-top: 24px solid var(--brand-orange, rgb(248 151 29));
   border-radius: 8px;
@@ -64,7 +105,7 @@
 /* ----------------------------------------------------------------------------
    Percentage stats: thin-ring donut gauge with a blue arc + centered number
    -------------------------------------------------------------------------- */
-.cards-stats > ul > li.cards-stats-percent {
+.cards-stats li.cards-stats-percent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,19 +177,38 @@
 }
 
 /* ----------------------------------------------------------------------------
-   Desktop: 2 icon cards side by side, 3 percentage gauges side by side
+   Desktop: heading left (~1/3) + 2 icon cards right (~2/3) on row 1;
+   3 donut gauges spanning both columns on row 2.
    -------------------------------------------------------------------------- */
 @media (width >= 900px) {
-  .cards-stats > ul {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 32px 24px;
+  .cards-stats.block {
+    grid-template-columns: minmax(300px, 1fr) 2fr;
+    align-items: start;
   }
 
-  .cards-stats > ul > li.cards-stats-icon {
-    grid-column: span 3;
+  .cards-stats .cards-stats-heading {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
   }
 
-  .cards-stats > ul > li.cards-stats-percent {
-    grid-column: span 2;
+  .cards-stats .cards-stats-icons {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .cards-stats .cards-stats-icons ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cards-stats .cards-stats-donuts {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .cards-stats .cards-stats-donuts ul {
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    gap: 32px;
   }
 }

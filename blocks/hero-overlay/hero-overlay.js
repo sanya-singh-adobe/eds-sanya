@@ -10,16 +10,34 @@ export default function decorate(block) {
   if (mediaImg && /\.(mp4|webm)(\?|$)/i.test(mediaImg.getAttribute('src') || '')) {
     const src = mediaImg.getAttribute('src');
     const video = document.createElement('video');
-    video.autoplay = true;
+    // Set autoplay-critical flags as HTML ATTRIBUTES (not just JS properties).
+    // Browsers only honor muted-autoplay when the `muted` and `autoplay`
+    // attributes are present in the markup; setting the JS property alone is
+    // unreliable on published environments (worked in EMA, failed on aem.page).
+    video.setAttribute('autoplay', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('loop', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('preload', 'auto');
+    video.setAttribute('aria-hidden', 'true');
+    // Keep the properties too for good measure (some engines read them first).
     video.muted = true;
+    video.autoplay = true;
     video.loop = true;
     video.playsInline = true;
-    video.setAttribute('playsinline', '');
-    video.setAttribute('aria-hidden', 'true');
-    video.src = src;
+    // Use a nested <source> so the type is explicit and the element can retry.
+    const source = document.createElement('source');
+    source.setAttribute('src', src);
+    source.setAttribute('type', 'video/mp4');
+    video.append(source);
     // Replace the whole <picture> (or the bare <img>) with the video.
     const picture = mediaImg.closest('picture');
     (picture || mediaImg).replaceWith(video);
+    // Kick off playback explicitly (covers browsers that ignore the attribute).
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => { /* autoplay blocked; poster frame remains */ });
+    }
   }
 
   // Distinguish usages by the content row shape:

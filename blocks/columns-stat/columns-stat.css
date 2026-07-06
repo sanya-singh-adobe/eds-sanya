@@ -3,23 +3,25 @@
    Full-bleed navy band, white text (left) + white stat card with lime top border (right).
    Values extracted from source computed styles. */
 
-/* Full-bleed: escape the section's max-width wrapper */
+/* Full-bleed: break out of the section max-width using the 100vw technique on
+   THIS block's own wrapper only. Do NOT restyle the shared `.section > div`
+   (the homepage is a single section, so a `.section:has(...) > div` override
+   would strip max-width from every other block on the page). */
 .columns-stat-wrapper {
-  max-width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Also neutralize the section content-div max-width constraint when this block is present */
-.section:has(> .columns-stat-wrapper) > div {
-  max-width: 100%;
+  max-width: unset;
   padding: 0;
 }
 
 .columns-stat {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
   background-color: var(--brand-navy);
   color: #fff;
-  padding: 30px 0;
+  padding: 60px 0;
 }
 
 /* Row: stacked on mobile, centered content column */
