@@ -2,16 +2,24 @@ export default function decorate(block) {
   // The media cell may reference a background video (e.g. the homepage primary
   // hero uses an .mp4). Videos MUST be authored as a link (<a href="…mp4">):
   // AEM's image pipeline rejects an <img src="…mp4"> and rewrites it to
-  // about:error on publish, so an authored image would never render. Detect the
-  // mp4/webm reference from either a link (preferred, publish-safe) or an <img>
-  // (local/EMA only) and get its URL.
+  // about:error on publish, so an authored image would never render.
+  //
+  // On publish, da.live also rewrites the link's HREF into a broken internal
+  // media path (e.g. ".../homepagehero.mp4" -> "//media/.../homepagehero-mp4"),
+  // but it leaves the link TEXT as the original URL. So resolve the video URL
+  // from the href when it's still a valid video URL, otherwise fall back to the
+  // link text. An <img> src is only used locally/in EMA where no rewrite occurs.
   const mediaCell = block.querySelector(':scope > div:first-child');
   const isVideoUrl = (url) => /\.(mp4|webm)(\?|$)/i.test(url || '');
-  const mediaLink = mediaCell
-    ? [...mediaCell.querySelectorAll('a[href]')].find((a) => isVideoUrl(a.getAttribute('href')))
+  const links = mediaCell ? [...mediaCell.querySelectorAll('a')] : [];
+  const mediaLink = links.find((a) => isVideoUrl(a.getAttribute('href'))
+    || isVideoUrl((a.textContent || '').trim()));
+  const linkUrl = mediaLink
+    ? [mediaLink.getAttribute('href'), (mediaLink.textContent || '').trim()]
+      .find((u) => isVideoUrl(u))
     : null;
   const mediaImg = mediaCell ? mediaCell.querySelector('img') : null;
-  const videoUrl = (mediaLink && mediaLink.getAttribute('href'))
+  const videoUrl = linkUrl
     || (mediaImg && isVideoUrl(mediaImg.getAttribute('src')) ? mediaImg.getAttribute('src') : null);
 
   if (!videoUrl && !block.querySelector(':scope > div:first-child picture')) {
