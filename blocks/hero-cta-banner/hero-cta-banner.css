@@ -17,9 +17,11 @@
   right: 50%;
   width: 100vw;
 
-  /* Space ABOVE the CTA band, none below — it sits flush before the footer
-     (issue #10: margin above, not below). */
-  margin: 60px -50vw -40px;
+  /* Space above and below the CTA band. The careers page has the EEO legal
+     paragraph after this banner, so it needs a real gap below (matches the live
+     site's 60px). The homepage variant overrides the bottom margin to sit flush
+     before the footer (see .has-heading below). */
+  margin: 60px -50vw;
   padding: 100px 24px;
   background-color: rgb(0 118 152);
   color: rgb(255 255 255);
@@ -115,8 +117,10 @@
  * ------------------------------------------------------------------ */
 .hero-cta-banner.has-heading {
   /* Homepage band sits flush against the preceding Latest Insights section
-     (no gap after insights). Careers variant keeps its margin-top. */
+     (no gap after insights) and flush before the footer. Careers variant keeps
+     its default 60px top/bottom margins. */
   margin-top: 0;
+  margin-bottom: -40px;
   padding: 60px 0;
   text-align: left;
 }

@@ -32,8 +32,16 @@ header nav[aria-expanded='true'] {
 }
 
 @media (width >= 900px) {
+  /* Keep the header fixed (sticky) on desktop, matching the live site. The
+     desktop header is two rows tall (49px utility + 73px brand/menu = 122px),
+     so reserve that height on the <header> placeholder so content below the
+     fixed header isn't hidden underneath it. */
   header .nav-wrapper {
-    position: relative;
+    position: fixed;
+  }
+
+  header {
+    height: 122px;
   }
 
   /* Two-row header: utility bar (tools) on top, brand + main menu below.
