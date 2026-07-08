@@ -34,6 +34,16 @@ export default function decorate(block) {
       });
       if (pictures.length && onlyPicturesOrPWrappers) {
         col.classList.add('columns-media-img-col');
+        // EDS wraps each bare image in its own <p>. The collage layout targets
+        // picture:nth-child(1/2/3), which only works when the pictures are direct
+        // siblings — otherwise every picture is :nth-child(1) of its own <p> and
+        // they stack on top of each other. Flatten the picture-only <p> wrappers
+        // so the pictures become direct children of the image column.
+        [...col.children].forEach((child) => {
+          if (child.tagName === 'P' && child.querySelector('picture')) {
+            child.replaceWith(...child.childNodes);
+          }
+        });
       }
     });
   });

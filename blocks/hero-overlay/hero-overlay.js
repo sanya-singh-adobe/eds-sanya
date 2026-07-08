@@ -1,14 +1,26 @@
 export default function decorate(block) {
-  if (!block.querySelector(':scope > div:first-child picture')) {
+  // The media cell may reference a background video (e.g. the homepage primary
+  // hero uses an .mp4). Videos MUST be authored as a link (<a href="…mp4">):
+  // AEM's image pipeline rejects an <img src="…mp4"> and rewrites it to
+  // about:error on publish, so an authored image would never render. Detect the
+  // mp4/webm reference from either a link (preferred, publish-safe) or an <img>
+  // (local/EMA only) and get its URL.
+  const mediaCell = block.querySelector(':scope > div:first-child');
+  const isVideoUrl = (url) => /\.(mp4|webm)(\?|$)/i.test(url || '');
+  const mediaLink = mediaCell
+    ? [...mediaCell.querySelectorAll('a[href]')].find((a) => isVideoUrl(a.getAttribute('href')))
+    : null;
+  const mediaImg = mediaCell ? mediaCell.querySelector('img') : null;
+  const videoUrl = (mediaLink && mediaLink.getAttribute('href'))
+    || (mediaImg && isVideoUrl(mediaImg.getAttribute('src')) ? mediaImg.getAttribute('src') : null);
+
+  if (!videoUrl && !block.querySelector(':scope > div:first-child picture')) {
     block.classList.add('no-image');
   }
 
-  // The media cell may reference a background video that the importer captured
-  // as an <img> (e.g. the homepage primary hero uses an .mp4). An <img> cannot
-  // render a video, so swap it for an autoplaying, muted, looping <video>.
-  const mediaImg = block.querySelector(':scope > div:first-child img');
-  if (mediaImg && /\.(mp4|webm)(\?|$)/i.test(mediaImg.getAttribute('src') || '')) {
-    const src = mediaImg.getAttribute('src');
+  // Swap the authored link/img for an autoplaying, muted, looping <video>.
+  if (videoUrl) {
+    const src = videoUrl;
     const video = document.createElement('video');
     // Set autoplay-critical flags as HTML ATTRIBUTES (not just JS properties).
     // Browsers only honor muted-autoplay when the `muted` and `autoplay`
@@ -28,11 +40,14 @@ export default function decorate(block) {
     // Use a nested <source> so the type is explicit and the element can retry.
     const source = document.createElement('source');
     source.setAttribute('src', src);
-    source.setAttribute('type', 'video/mp4');
+    source.setAttribute('type', src.includes('.webm') ? 'video/webm' : 'video/mp4');
     video.append(source);
-    // Replace the whole <picture> (or the bare <img>) with the video.
-    const picture = mediaImg.closest('picture');
-    (picture || mediaImg).replaceWith(video);
+    // Replace whatever carried the video reference: the authored link (and its
+    // wrapping <p>), or the <picture>/<img> on local/EMA.
+    let target = mediaLink || mediaImg;
+    if (mediaImg && !mediaLink) target = mediaImg.closest('picture') || mediaImg;
+    const wrapperP = target && target.closest('p');
+    (wrapperP || target).replaceWith(video);
     // Kick off playback explicitly (covers browsers that ignore the attribute).
     const playPromise = video.play();
     if (playPromise && typeof playPromise.catch === 'function') {

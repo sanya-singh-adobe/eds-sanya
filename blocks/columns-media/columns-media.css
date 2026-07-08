@@ -145,12 +145,8 @@
 }
 
 /* collage of photos -- mobile: a simple stacked column of rounded photos.
-   EDS wraps the three bare images in a single <p>; flatten it so the pictures
-   participate directly in the img-col layout. */
-.columns-media-collage .columns-media-img-col > p {
-  display: contents;
-}
-
+   The block JS flattens the per-image <p> wrappers EDS adds, so the pictures
+   are direct children of the img column here. */
 .columns-media-collage .columns-media-img-col {
   display: flex;
   flex-direction: column;
