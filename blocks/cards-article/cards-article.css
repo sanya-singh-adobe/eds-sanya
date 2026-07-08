@@ -216,7 +216,7 @@
 }
 
 /* Description */
-.cards-article .cards-article-card-body > p:not(:first-child):not(.button-container) {
+.cards-article .cards-article-card-body > p:not(:first-child, .button-container) {
   margin: 0;
   padding: 0 24px 12px;
   font-family: var(--body-font-family);

@@ -4,6 +4,7 @@ header .nav-wrapper {
   width: 100%;
   z-index: 2;
   position: fixed;
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
 }
 
 header nav {
@@ -153,7 +154,7 @@ header .nav-brand {
 }
 
 header nav .nav-brand img {
-  width: 128px;
+  width: 200px;
   height: auto;
 }
 
@@ -275,16 +276,6 @@ header nav .nav-tools {
   grid-area: tools;
 }
 
-/* --- TEKsystems header styling --- */
-header .nav-wrapper {
-  border-bottom: 1px solid rgb(0 0 0 / 8%);
-}
-
-header nav .nav-brand img {
-  width: 200px;
-  height: auto;
-}
-
 @media (width >= 900px) {
   header nav .nav-sections {
     grid-area: sections;
@@ -329,8 +320,7 @@ header nav .nav-brand img {
   /* Utility bar sits in the top row, right-aligned */
   header nav .nav-tools {
     grid-area: tools;
-    justify-self: end;
-    align-self: center;
+    place-self: center end;
   }
 }
 
@@ -366,6 +356,7 @@ header nav .nav-tools a::before {
   width: 16px;
   height: 16px;
   background-color: currentcolor;
+  /* stylelint-disable-next-line property-no-vendor-prefix -- Safari needs the prefix for masked icons */
   -webkit-mask: var(--nav-tool-icon) center / contain no-repeat;
   mask: var(--nav-tool-icon) center / contain no-repeat;
 }

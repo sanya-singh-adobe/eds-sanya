@@ -144,6 +144,7 @@
       var(--brand-accent-blue, rgb(0 149 211)) calc(var(--percent) * 1%),
       transparent 0
     );
+  /* stylelint-disable-next-line property-no-vendor-prefix -- Safari needs the prefix for masked donut ring */
   -webkit-mask:
     radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
   mask:

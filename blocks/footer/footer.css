@@ -94,8 +94,7 @@ footer .footer .section:last-child p {
   footer .footer > div {
     display: grid;
     grid-template-columns: 1.4fr 1fr 2fr;
-    column-gap: 40px;
-    row-gap: 0;
+    gap: 0 40px;
     padding: 56px 32px 32px;
     align-items: start;
   }

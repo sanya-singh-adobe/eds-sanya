@@ -279,6 +279,7 @@
     justify-content: space-between;
     gap: 60px;
     box-sizing: border-box;
+
     /* Shorter band (issue #2): two panels stacked, each a compact height
        rather than a full-viewport 778px slide. */
     min-height: 0;

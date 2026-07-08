@@ -16,12 +16,10 @@
   left: 50%;
   right: 50%;
   width: 100vw;
+
   /* Space ABOVE the CTA band, none below — it sits flush before the footer
      (issue #10: margin above, not below). */
-  margin-top: 60px;
-  margin-bottom: -40px;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  margin: 60px -50vw -40px;
   padding: 100px 24px;
   background-color: rgb(0 118 152);
   color: rgb(255 255 255);

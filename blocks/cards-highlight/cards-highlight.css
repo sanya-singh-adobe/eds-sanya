@@ -9,8 +9,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  column-gap: 30px;
-  row-gap: 32px;
+  gap: 32px 30px;
 }
 
 /* Cards are plain text — no background, border, radius, or shadow */
@@ -102,7 +101,6 @@
 @media (width >= 900px) {
   .cards-highlight > ul {
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 60px;
-    row-gap: 40px;
+    gap: 40px 60px;
   }
 }
